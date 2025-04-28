@@ -60,7 +60,9 @@ macro(setup)
 
     # CMake defaults to -O2 for CUDA at Release, let's wipe that and use the global RELEASE_FLAG
     # appended later
-    wipe_gcc_style_optimisation_flags(CMAKE_CUDA_FLAGS_${BUILD_TYPE})
+    if(NOT ACPP_PCUDA_DRIVER)
+        wipe_gcc_style_optimisation_flags(CMAKE_CUDA_FLAGS_${BUILD_TYPE})
+    endif()
 
     if (MANAGED_ALLOC)
         register_definitions(CLOVER_MANAGED_ALLOC)
