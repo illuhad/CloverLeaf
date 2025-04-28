@@ -55,7 +55,7 @@ void calc_dt_kernel(global_variables &globals, int x_min, int x_max, int y_min, 
   const int BLOCK = 256;
   clover::Buffer1D<double> dt_min_val_buffer(globals.context, BLOCK);
   int range = (xEnd - xStart) * (yEnd - yStart);
-  clover::par_reduce<BLOCK, BLOCK>([=] DEVICE_KERNEL(int gid) {
+  clover::par_reduce<BLOCK, BLOCK>([=] __device__(int gid) {
     __shared__ double mins[BLOCK];
     mins[threadIdx.x] = g_big;
     for (int v = gid; v < range; v += blockDim.x * gridDim.x) {

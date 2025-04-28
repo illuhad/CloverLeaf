@@ -30,14 +30,8 @@
 #include "shared.h"
 
 #define CLOVER_DEFAULT_BLOCK_SIZE (256)
-#ifndef __ACPP_PCUDA__
-// clang does not currently correctly handle GNU-style attributes
-// for lambda functions, but AdaptiveCpp does not need these
-// attributes anyway in most cases.
+
 #define DEVICE_KERNEL __host__ __device__
-#else
-#define DEVICE_KERNEL
-#endif
 
 // #define CLOVER_SYNC_ALL_KERNELS
 // #define CLOVER_MANAGED_ALLOC

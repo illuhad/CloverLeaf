@@ -79,7 +79,7 @@ void field_summary(global_variables &globals, parallel_ &parallel) {
     field_type &field = t.field;
 
     int range = (ymax - ymin + 1) * (xmax - xmin + 1);
-    clover::par_reduce<BLOCK, BLOCK>([=] DEVICE_KERNEL(int gid) {
+    clover::par_reduce<BLOCK, BLOCK>([=] __device__(int gid) {
       __shared__ double vol[BLOCK];
       __shared__ double mass[BLOCK];
       __shared__ double ie[BLOCK];
